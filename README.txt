@@ -10,7 +10,6 @@ The numbered directories contain the protocols used at each step of the modeling
 The final models are in the rosetta_models directory.
 
 
-
 Outline of file structure:
 01_DHR10mica4
 
@@ -19,8 +18,8 @@ Outline of file structure:
 	2b_monte_carlo_torsion_sampling
 
 03_DHR10mica18_on_mica001_Ksublayer
-3a_DHR10mica18_docking_on_potassium_sublattice
-3b_DHR10mica14_checker_positive_control
+	3a_DHR10mica18_docking_on_potassium_sublattice
+	3b_DHR10mica14_checker_positive_control
 
 04_DHR10mica18_NonCapped
 
