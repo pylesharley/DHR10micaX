@@ -1,0 +1,7 @@
+See ./assembling_input_pdbs/ for building the following:
+DHR10mica3H_repacked_honeycomb_hexamer_on_Ksublayer.pdb
+DHR10mica4H_repacked_honeycomb_hexamer_on_Ksublayer.pdb
+DHR10mica6H_repacked_honeycomb_hexamer_on_Ksublayer.pdb
+DHR10mica7H_repacked_honeycomb_hexamer_on_Ksublayer.pdb
+
+Commands in example_rosetta_scripts_command.txt repack and minimize the docks of the subunits in honeycomb hexamers on the mica001 K sublayer.

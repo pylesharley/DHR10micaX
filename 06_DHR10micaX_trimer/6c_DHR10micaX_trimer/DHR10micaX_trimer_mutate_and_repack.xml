@@ -1,0 +1,96 @@
+<ROSETTASCRIPTS>
+
+    <TASKOPERATIONS>
+        <LimitAromaChi2 name="aroChi"/>
+    </TASKOPERATIONS>
+
+    <SCOREFXNS>
+        <ScoreFunction name="beta" weights="beta_nov16" symmetric="1">
+        </ScoreFunction>
+    </SCOREFXNS>
+
+
+    <FILTERS>
+        <ShapeComplementarity name="sc" jump="1" verbose="1" min_sc="0.5" write_int_area="1" confidence="0" /> 
+        <Ddg name="ddg" scorefxn="beta" chain_num="2" repeats="1" repack="false" repack_bound="false" confidence="0"/>
+
+    </FILTERS>
+
+
+    <MOVERS>
+        <RigidBodyTransMover name="lattice_matched_translation" jump="1" distance="%%distance%%" x="%%translate_X%%" y="%%translate_Y%%" z="0" />
+        
+        <SetupForSymmetry name="setup_symm" definition="C3_Z.sym" />
+
+        <MutateResidue name="mutate_residue_1" target="1" new_res="SER" />
+        <MutateResidue name="mutate_residue_2" target="2" new_res="VAL" />
+        <MutateResidue name="mutate_residue_3" target="3" new_res="TRP" />
+        <MutateResidue name="mutate_residue_6" target="6" new_res="LYS" />
+        <MutateResidue name="mutate_residue_7" target="7" new_res="ALA" />
+        <MutateResidue name="mutate_residue_11" target="11" new_res="ARG" />
+        <MutateResidue name="mutate_residue_12" target="12" new_res="GLU" />
+        <MutateResidue name="mutate_residue_14" target="14" new_res="ALA" />
+        <MutateResidue name="mutate_residue_18" target="18" new_res="PHE" />
+        <MutateResidue name="mutate_residue_24" target="24" new_res="PHE" />
+        <MutateResidue name="mutate_residue_25" target="25" new_res="ALA" />
+        <MutateResidue name="mutate_residue_28" target="28" new_res="GLU" />
+        <MutateResidue name="mutate_residue_29" target="29" new_res="ALA" />
+        <MutateResidue name="mutate_residue_32" target="32" new_res="LYS" />
+        <MutateResidue name="mutate_residue_36" target="36" new_res="ALA" />
+        <MutateResidue name="mutate_residue_39" target="39" new_res="VAL" />
+        <MutateResidue name="mutate_residue_43" target="43" new_res="LYS" />
+
+        <FastRelax name="repack" scorefxn="beta" repeats="3" task_operations="aroChi">
+            <MoveMap jump="0" chi="0" bb="0" >
+                <!-- Residues near interface allowed to repack rotamers (except for lattice-matched glutamates) -->
+                <Span begin="1" end="25" chi="1" bb="0"/> 
+                <Span begin="27" end="32" chi="1" bb="0"/> 
+                <Span begin="34" end="39" chi="1" bb="0"/> 
+                <Span begin="41" end="60" chi="1" bb="0"/> 
+            </MoveMap>
+        </FastRelax>
+
+        
+    </MOVERS>
+
+
+    <APPLY_TO_POSE>
+    </APPLY_TO_POSE>
+
+   
+    <PROTOCOLS>
+        <Add mover_name="mutate_residue_1" />
+        <Add mover_name="mutate_residue_2" />
+        <Add mover_name="mutate_residue_3" />
+        <Add mover_name="mutate_residue_6" />
+        <Add mover_name="mutate_residue_7" />
+        <Add mover_name="mutate_residue_11" />
+        <Add mover_name="mutate_residue_12" />
+        <Add mover_name="mutate_residue_14" />
+        <Add mover_name="mutate_residue_18" />
+        <Add mover_name="mutate_residue_24" />
+        <Add mover_name="mutate_residue_25" />
+        <Add mover_name="mutate_residue_28" />
+        <Add mover_name="mutate_residue_29" />
+        <Add mover_name="mutate_residue_32" />
+        <Add mover_name="mutate_residue_36" />
+        <Add mover_name="mutate_residue_39" />
+        <Add mover_name="mutate_residue_43" />
+
+        <Add mover_name="setup_symm"/>
+
+        <Add mover_name="lattice_matched_translation" />
+
+        <Add mover_name="repack" />
+
+        <Add filter_name="ddg" />
+        <Add filter_name="sc" />
+        
+      </PROTOCOLS>
+
+
+    <OUTPUT scorefxn="beta" />
+
+
+ 
+</ROSETTASCRIPTS>

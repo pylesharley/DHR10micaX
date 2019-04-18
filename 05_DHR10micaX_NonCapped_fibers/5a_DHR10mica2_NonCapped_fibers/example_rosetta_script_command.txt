@@ -1,0 +1,1 @@
+/PATH/rosetta_scripts.static.linuxgccrelease -database /PATH/database @rosetta_scripts.flag -s DHR10mica2NC_fiber_on_Ksublayer.pdb -scorefile score.sc -suffix _1A -parser:protocol DHR10mica2NC_fiber_on_Ksublayer.xml

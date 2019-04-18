@@ -1,0 +1,43 @@
+<ROSETTASCRIPTS>
+
+    <TASKOPERATIONS>
+    </TASKOPERATIONS>
+
+    <SCOREFXNS>
+        <ScoreFunction name="Beta" weights="beta_nov16" symmetric="1">
+        </ScoreFunction>
+    </SCOREFXNS>
+
+
+    <FILTERS>
+        <ShapeComplementarity name="sc" jump="1" verbose="1" min_sc="0.5" write_int_area="1" confidence="0" /> 
+    </FILTERS>
+
+
+    <MOVERS>
+        <AtomTree name="trimer_unit_fold_tree" fold_tree_file="DHR10mica5H_trimer_honeycomb_C2.ft" />
+
+        <RigidBodyTransMover name="lattice_matched_translation" jump="1" distance="%%distance%%" x="%%translate_X%%" y="%%translate_Y%%" z="0" />
+        
+        <SetupForSymmetry name="setup_symm" definition="C2_Z.sym" />
+    </MOVERS>
+
+
+    <APPLY_TO_POSE>
+    </APPLY_TO_POSE>
+
+   
+    <PROTOCOLS>
+        <Add mover_name="trimer_unit_fold_tree" />
+
+        <Add mover_name="lattice_matched_translation" />
+
+        <Add mover_name="setup_symm"/>
+    </PROTOCOLS>
+
+
+    <OUTPUT scorefxn="Beta" />
+
+
+ 
+</ROSETTASCRIPTS>

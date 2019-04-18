@@ -1,0 +1,74 @@
+<ROSETTASCRIPTS>
+
+    <TASKOPERATIONS>
+        <LimitAromaChi2 name="aroChi"/>
+    </TASKOPERATIONS>
+
+    <SCOREFXNS>
+        <ScoreFunction name="BetaSym" weights="beta_nov16" symmetric="1">
+        </ScoreFunction>
+        <ScoreFunction name="BetaSymCoordCst" weights="beta_nov16" symmetric="1">
+            <Reweight scoretype="coordinate_constraint" weight="1.0"/>
+        </ScoreFunction>
+    </SCOREFXNS>
+
+    <FILTERS>
+        <ShapeComplementarity name="sc" jump="1" verbose="1" min_sc="0.5" write_int_area="1" confidence="0" /> 
+        <Ddg name="ddg" scorefxn="BetaSym" jump="1" threshold="-0.001" repeats="1" repack="true" repack_bound="true" confidence="0"/>
+
+    </FILTERS>
+
+
+    <MOVERS>
+        <RigidBodyTransMover name="lattice_matched_translation" jump="1" distance="%%distance%%" x="%%translate_X%%" y="%%translate_Y%%" z="0" />
+        
+        <SetupForSymmetry name="setup_symm" definition="C2_Z.sym" />
+
+        <AddConstraintsToCurrentConformationMover name="add_CA_coordinate_constraints" cst_weight="0.5" use_distance_cst="False" coord_dev="1.0" bound_width="0.5" CA_only="True" bb_only="False"/> 
+
+        <FastRelax name="repack" scorefxn="BetaSymCoordCst" repeats="2" task_operations="aroChi">
+            <MoveMap jump="0" chi="0" bb="0" >
+                <!-- Residues in C-terminal repeat allowed to repack rotamers (except for lattice-matched glutamates) --> 
+                <Span begin="161" end="224" chi="1" bb="0"/> 
+                <Span begin="226" end="231" chi="1" bb="0"/> 
+                <Span begin="233" end="237" chi="1" bb="0"/> 
+            </MoveMap>
+        </FastRelax>
+
+        <FastRelax name="repack_and_minimize_dock" scorefxn="BetaSymCoordCst" repeats="2" task_operations="aroChi">
+            <MoveMap jump="1" chi="0" bb="0" >
+                <!-- Last repeat allowed to relax backbone -->
+                <Span begin="230" end="237" chi="0" bb="1"/> 
+                <!-- Residues in C-terminal repeat allowed to repack rotamers (except for lattice-matched glutamates) -->
+                <Span begin="161" end="224" chi="1" bb="1"/> 
+                <Span begin="226" end="231" chi="1" bb="1"/> 
+                <Span begin="233" end="237" chi="1" bb="1"/> 
+            </MoveMap>
+        </FastRelax>
+
+    </MOVERS>
+
+
+    <APPLY_TO_POSE>
+    </APPLY_TO_POSE>
+
+   
+    <PROTOCOLS>
+        <Add mover_name="setup_symm"/>
+        <Add mover_name="lattice_matched_translation" />
+
+        <Add mover_name="add_CA_coordinate_constraints" />
+        
+        <Add mover_name="repack" />
+        <Add mover_name="repack_and_minimize_dock" />
+
+        <Add filter_name="ddg" />
+        <Add filter_name="sc" />
+    </PROTOCOLS>
+
+
+    <OUTPUT scorefxn="BetaSym" />
+
+
+ 
+</ROSETTASCRIPTS>

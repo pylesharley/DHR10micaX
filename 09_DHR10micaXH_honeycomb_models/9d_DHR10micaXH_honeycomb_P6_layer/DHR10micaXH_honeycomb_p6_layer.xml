@@ -1,0 +1,61 @@
+<ROSETTASCRIPTS>
+
+    <TASKOPERATIONS>
+        <LimitAromaChi2 name="aroChi"/>
+    </TASKOPERATIONS>
+
+    <SCOREFXNS>
+        <ScoreFunction name="BetaSym" weights="beta_nov16" symmetric="1">
+        </ScoreFunction>
+        <ScoreFunction name="BetaSymCoordCst" weights="beta_nov16" symmetric="1">
+            <Reweight scoretype="coordinate_constraint" weight="1.0"/>
+        </ScoreFunction>
+    </SCOREFXNS>
+
+
+    <FILTERS>
+        <ShapeComplementarity name="sc" jump="1" verbose="1" min_sc="0.5" write_int_area="1" confidence="0" /> 
+        <Ddg name="ddg" scorefxn="BetaSym" jump="1" repeats="1" repack="true" repack_bound="false" confidence="0"/>
+
+    </FILTERS>
+
+
+    <MOVERS>
+        <SetupForSymmetry name="setup_symm" definition="%%sym%%" />
+
+        <AddConstraintsToCurrentConformationMover name="add_CA_coordinate_constraints" cst_weight="0.1" use_distance_cst="False" coord_dev="1.0" bound_width="0.5" CA_only="True" bb_only="False"/> 
+
+        <FastRelax name="repack" scorefxn="BetaSymCoordCst" repeats="2" task_operations="aroChi">
+            <MoveMap jump="0" chi="1" bb="0" >
+            </MoveMap>
+        </FastRelax>
+
+        <FastRelax name="repack_and_minimize_dock_with_constraints" scorefxn="BetaSymCoordCst" repeats="2" task_operations="aroChi">
+            <MoveMap jump="1" chi="1" bb="0" >
+            </MoveMap>
+        </FastRelax>
+
+    </MOVERS>
+
+
+    <APPLY_TO_POSE>
+    </APPLY_TO_POSE>
+
+   
+    <PROTOCOLS>
+        <Add mover_name="setup_symm"/>
+        <Add mover_name="add_CA_coordinate_constraints" />
+        
+        <Add mover_name="repack" />
+        <Add mover_name="repack_and_minimize_dock_with_constraints" />
+
+        <Add filter_name="ddg" />
+        <Add filter_name="sc" />    
+    </PROTOCOLS>
+
+
+    <OUTPUT scorefxn="BetaSym" />
+
+
+ 
+</ROSETTASCRIPTS>

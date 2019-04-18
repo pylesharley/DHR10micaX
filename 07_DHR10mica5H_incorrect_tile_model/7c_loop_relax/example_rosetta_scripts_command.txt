@@ -1,0 +1,2 @@
+/home/pylesh/rosetta_builds/main/source/bin/rosetta_scripts.static.linuxgccrelease -database /home/pylesh/rosetta_builds/main/database @rosetta_scripts.flag -s DHR10mica5_monomer_Ctrim_38E_0001.pdb -scorefile score.sc -suffix _1A -parser:protocol DHR10mica5_ReloopReplacementRelax.xml
+

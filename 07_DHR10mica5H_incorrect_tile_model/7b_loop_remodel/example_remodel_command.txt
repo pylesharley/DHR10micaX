@@ -1,0 +1,1 @@
+/PATH/remodel.static.linuxgccrelease -database /PATH/database @remodel.flags -scorefile score.sc -s DHR10mica5_monomer_Ctrim.pdb -out:suffix _1A 

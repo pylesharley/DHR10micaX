@@ -1,0 +1,45 @@
+<ROSETTASCRIPTS>
+
+    <TASKOPERATIONS>
+    </TASKOPERATIONS>
+
+    <SCOREFXNS>
+        <ScoreFunction name="beta" weights="beta_nov16" symmetric="1">
+        </ScoreFunction>
+    </SCOREFXNS>
+
+
+    <FILTERS>
+        <ShapeComplementarity name="sc" jump="1" verbose="1" min_sc="0.5" write_int_area="1" confidence="0" /> 
+        <Ddg name="ddg" scorefxn="beta" jump="1" threshold="-0.001" repeats="1" repack="false" repack_bound="false" confidence="1"/>
+    </FILTERS>
+
+    <MOVERS>
+        <MakePolyX name="make_poly_alanine" aa="ALA" keep_pro="1"  keep_gly="1" keep_disulfide_cys="1" />
+
+        <RigidBodyTransMover name="lattice_matched_translation" jump="1" distance="%%distance%%" x="%%translate_X%%" y="%%translate_Y%%" z="0" />
+        
+        <SetupForSymmetry name="setup_symm" definition="C3_Z.sym" />
+    </MOVERS>
+
+
+    <APPLY_TO_POSE>
+    </APPLY_TO_POSE>
+
+   
+    <PROTOCOLS>
+        <Add mover_name="make_poly_alanine" />
+
+        <Add mover_name="setup_symm"/>
+        <Add mover_name="lattice_matched_translation" />
+        
+        <Add filter_name="sc"/>
+        <Add filter_name="ddg"/>
+    </PROTOCOLS>
+
+
+    <OUTPUT scorefxn="beta" />
+
+
+ 
+</ROSETTASCRIPTS>

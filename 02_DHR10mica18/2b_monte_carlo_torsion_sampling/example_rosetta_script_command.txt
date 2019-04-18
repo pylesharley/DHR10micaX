@@ -1,0 +1,2 @@
+/PATH/rosetta_scripts.static.linuxgccrelease -database /PATH/database @rosetta_scripts.flag -s DHR10_mica18.pdb  -scorefile score.sc -suffix _thread_0A -parser:script_vars checkpoint=MC_check_DHR10_mica18_0A -nstruct 100 -parser:protocol DHR10mica18_NCS_MonteCarlo.xml
+

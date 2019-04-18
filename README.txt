@@ -1,0 +1,57 @@
+Rosetta macromolecular modelling suite and PyRosetta are available at (https://www.rosettacommons.org/)
+
+Version of Rosetta Scripts used:
+Rosetta version: 2017.52.post.dev+149.master.ff4c3ae ff4c3aeee44348141f36a2b306feffb8ec221943 https://github.com/RosettaCommons/main.git 2018-01-02T10:53:05
+
+This directory contains the protocols used to model the DHR10micaX protein assemblies on the mica(001) K+ sublayer.
+
+The numbered directories contain the protocols used at each step of the modeling process.
+
+The final models are in the rosetta_models directory.
+
+
+
+Outline of file structure:
+01_DHR10mica4
+
+02_DHR10mica18
+	2a_building_input_pdb
+	2b_monte_carlo_torsion_sampling
+
+03_DHR10mica18_on_mica001_Ksublayer
+3a_DHR10mica18_docking_on_potassium_sublattice
+3b_DHR10mica14_checker_positive_control
+
+04_DHR10mica18_NonCapped
+
+05_DHR10micaX_NonCapped_fibers
+	5a_DHR10mica2_NonCapped_fibers
+	5b_DHR10mica6_NonCapped_fibers
+
+06_DHR10micaX_trimer
+	6a_trim_terminus
+	6b_translate_and_trimerize_on_lattice
+	6c_DHR10micaX_trimer
+	6d_DHR10mica5_trimer_on_mica
+
+07_DHR10mica5H_incorrect_tile_model
+	7a_translate_and_dimerize_on_lattice
+	7b_loop_remodel
+	7c_loop_relax
+	7d_trimer_with_loop_replacement
+	7e_P6_layer_symmetry_definition_file
+	7f_DHR10mica5H_tile_p6_layer
+
+08_DHR10mica5H_honeycomb_model
+	8a_screening_DHR10mica5H_honeycomb_C2_interfaces
+	8b_modeling_candidate_C2_interfaces
+	8c_honeycomb_P6_symmetry_definition_file
+	8d_DHR10mica5H_honeycomb_p6_layer
+	8e_DHR10mica5H_honeycomb_hexamer_on_mica_relax
+
+09_DHR10micaXH_honeycomb_models
+	9a_generating_DHR10micaXH_monomers
+	9b_DHR10micaXH_honeycomb_dimer_of_trimers
+	9c_DHR10micaXH_honeycomb_P6_symmetry_definition_files
+	9d_DHR10micaXH_honeycomb_P6_layer
+	9e_DHR10micaXH_honeycomb_hexamers_on_Ksublayer

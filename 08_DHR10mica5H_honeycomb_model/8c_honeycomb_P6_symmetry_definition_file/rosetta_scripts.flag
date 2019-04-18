@@ -1,0 +1,9 @@
+#-mute all
+
+-nstruct 1
+
+-beta_nov16 
+-corrections::beta_nov16 1
+
+-chemical:exclude_patches Cterm_amidation SpecialRotamer VirtualBB ShoveBB VirtualDNAPhosphate VirtualNTerm CTermConnect sc_orbitals pro_hydroxylated_case1 pro_hydroxylated_case2 ser_phosphorylated thr_phosphorylated  tyr_phosphorylated tyr_sulfated lys_dimethylated lys_monomethylated  lys_trimethylated lys_acetylated glu_carboxylated cys_acetylated tyr_diiodinated N_acetylated C_methylamidated MethylatedProteinCterm    # Excluded to improve speed and memory usage
+

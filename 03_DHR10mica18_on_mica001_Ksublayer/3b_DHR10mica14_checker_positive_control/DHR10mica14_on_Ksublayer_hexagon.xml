@@ -1,0 +1,129 @@
+<ROSETTASCRIPTS>
+
+    <TASKOPERATIONS>
+    </TASKOPERATIONS>
+
+    <SCOREFXNS>
+        <ScoreFunction name="beta" weights="beta_nov16">
+        </ScoreFunction>
+    </SCOREFXNS>
+
+
+    <FILTERS>
+        <Ddg name="ddg" scorefxn="beta" chain_num="2" repeats="1" repack="false" repack_bound="false" confidence="0"/>
+    </FILTERS>
+
+
+    <MOVERS>
+    <!-- // Fold tree -->
+        <AtomTree name="fold_tree" fold_tree_file="DHR10mica14_on_Ksublayer_hexagon.ft"/>
+        
+        <MinMover name="min_side_chain" scorefxn="beta" chi="1" bb="0" jump="0">
+            <MoveMap jump="0" chi="1" bb="0" >
+                <Chain number="2" bb="0" chi="1" />
+                <Jump number="2269" setting="1"/>
+            </MoveMap>
+        </MinMover>
+
+        <FastRelax name="repack_and_dock" scorefxn="beta" repeats="2" >
+            <MoveMap jump="0" chi="0" bb="0" >
+                <Chain number="2" bb="0" chi="0" />
+                <Span begin="2300" end="2300" chi="1" bb="0"/> <!-- Residues that can clash with surface are allowed to repack -->
+                <Span begin="2303" end="2303" chi="1" bb="0"/>
+                <Span begin="2364" end="2364" chi="1" bb="0"/>
+                <Span begin="2414" end="2414" chi="1" bb="0"/>
+                <Span begin="2464" end="2464" chi="1" bb="0"/>
+                <Span begin="2514" end="2514" chi="1" bb="0"/>
+                <Span begin="2564" end="2564" chi="1" bb="0"/>
+                <Span begin="2614" end="2614" chi="1" bb="0"/>
+                <Span begin="2664" end="2664" chi="1" bb="0"/>
+                <Span begin="2714" end="2714" chi="1" bb="0"/>
+                <Span begin="2764" end="2764" chi="1" bb="0"/>
+                <Span begin="2814" end="2814" chi="1" bb="0"/>
+                <Span begin="2864" end="2864" chi="1" bb="0"/>
+                <Span begin="2914" end="2914" chi="1" bb="0"/>
+                <Span begin="2964" end="2964" chi="1" bb="0"/>
+                <Span begin="2514" end="2514" chi="1" bb="0"/>
+                <Span begin="2564" end="2564" chi="1" bb="0"/>
+                <!-- Top row of glutamate array -->
+                <Span begin="2297" end="2297" chi="1" bb="0"/>
+                <Span begin="2347" end="2347" chi="1" bb="0"/>
+                <Span begin="2397" end="2397" chi="1" bb="0"/>
+                <Span begin="2447" end="2447" chi="1" bb="0"/>
+                <Span begin="2497" end="2497" chi="1" bb="0"/>
+                <Span begin="2547" end="2547" chi="1" bb="0"/>
+                <Span begin="2597" end="2597" chi="1" bb="0"/>
+                <Span begin="2647" end="2647" chi="1" bb="0"/>
+                <Span begin="2697" end="2697" chi="1" bb="0"/>
+                <Span begin="2747" end="2747" chi="1" bb="0"/>
+                <Span begin="2797" end="2797" chi="1" bb="0"/>
+                <Span begin="2847" end="2847" chi="1" bb="0"/>
+                <Span begin="2897" end="2897" chi="1" bb="0"/>
+                <Span begin="2947" end="2947" chi="1" bb="0"/>
+                <!-- middle row of glutamate array -->
+                <Span begin="2304" end="2304" chi="1" bb="0"/>
+                <Span begin="2354" end="2354" chi="1" bb="0"/>
+                <Span begin="2404" end="2404" chi="1" bb="0"/>
+                <Span begin="2454" end="2454" chi="1" bb="0"/>
+                <Span begin="2504" end="2504" chi="1" bb="0"/>
+                <Span begin="2554" end="2554" chi="1" bb="0"/>
+                <Span begin="2604" end="2604" chi="1" bb="0"/>
+                <Span begin="2654" end="2654" chi="1" bb="0"/>
+                <Span begin="2704" end="2704" chi="1" bb="0"/>
+                <Span begin="2754" end="2754" chi="1" bb="0"/>
+                <Span begin="2804" end="2804" chi="1" bb="0"/>
+                <Span begin="2854" end="2854" chi="1" bb="0"/>
+                <Span begin="2904" end="2904" chi="1" bb="0"/>
+                <Span begin="2954" end="2954" chi="1" bb="0"/>
+                <!-- bottom row of glutamate array -->
+                <Span begin="2311" end="2311" chi="1" bb="0"/>
+                <Span begin="2361" end="2361" chi="1" bb="0"/>
+                <Span begin="2411" end="2411" chi="1" bb="0"/>
+                <Span begin="2461" end="2461" chi="1" bb="0"/>
+                <Span begin="2511" end="2511" chi="1" bb="0"/>
+                <Span begin="2561" end="2561" chi="1" bb="0"/>
+                <Span begin="2611" end="2611" chi="1" bb="0"/>
+                <Span begin="2661" end="2661" chi="1" bb="0"/>
+                <Span begin="2711" end="2711" chi="1" bb="0"/>
+                <Span begin="2761" end="2761" chi="1" bb="0"/>
+                <Span begin="2811" end="2811" chi="1" bb="0"/>
+                <Span begin="2861" end="2861" chi="1" bb="0"/>
+                <Span begin="2911" end="2911" chi="1" bb="0"/>
+                <Span begin="2961" end="2961" chi="1" bb="0"/>
+                <Jump number="2269" setting="1"/>
+            </MoveMap>
+        </FastRelax>
+
+        <Translate name="random_translate" chain="B" distribution="uniform" angstroms="5.2" cycles="1000" force="true"/>
+                
+        <RollMover name="random_spin" chain="2" min_angle="-35" max_angle="35" >
+            <axis x="0" y="0" z="1" /> 
+            <translate x="95.055000" y="0.466000" z="0" /> 
+        </RollMover> 
+    
+    </MOVERS>
+
+
+    <APPLY_TO_POSE>
+    </APPLY_TO_POSE>
+
+   
+    <PROTOCOLS>
+        <Add mover_name="fold_tree" />
+
+        <Add mover_name="random_spin" />
+        <Add mover_name="random_translate" />
+
+        <Add mover_name="repack_and_dock" />
+        <Add mover_name="min_side_chain" />
+
+        <Add filter_name="ddg" />
+        
+      </PROTOCOLS>
+
+
+    <OUTPUT scorefxn="beta" />
+
+
+ 
+</ROSETTASCRIPTS>

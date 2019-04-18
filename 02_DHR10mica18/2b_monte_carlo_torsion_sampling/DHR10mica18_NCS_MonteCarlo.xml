@@ -1,0 +1,128 @@
+<ROSETTASCRIPTS>
+    <TASKOPERATIONS>
+    </TASKOPERATIONS>
+
+    <RESIDUE_SELECTORS>
+       <Index name="middle" resnums="401A-450A" />
+       <Not name="not_middle" selector="middle" />
+    </RESIDUE_SELECTORS>
+
+    <SCOREFXNS>
+        <ScoreFunction name="beta" weights="beta_nov16">
+        </ScoreFunction>
+
+        <ScoreFunction name="Dihedral" weights="empty">
+            <Reweight scoretype="dihedral_constraint" weight="1"/>
+        </ScoreFunction>
+
+        <ScoreFunction name="betaCst" weights="beta_nov16">
+            <Reweight scoretype="atom_pair_constraint" weight="1.0"/>
+            <Reweight scoretype="dihedral_constraint" weight="1.0"/>                
+            <Reweight scoretype="coordinate_constraint" weight="1.0"/>
+        </ScoreFunction>
+
+        <ScoreFunction name="CoordinateCst" weights="empty">
+                <Reweight scoretype="coordinate_constraint" weight="1.0"/>
+        </ScoreFunction>
+
+    </SCOREFXNS>
+
+    <FILTERS>
+        <ScoreType name="betaCstFilter" scorefxn="betaCst" score_type="total_score" threshold="0" confidence="0" />
+
+        <ScoreType name="atom_pair_filter" score_type="atom_pair_constraint" scorefxn="betaCst" confidence="0" threshold="0" />
+        <ScoreType name="coordinate_filter" score_type="coordinate_constraint" scorefxn="betaCst" confidence="0" threshold="0" />
+        <ScoreType name="dihedral_filter" score_type="dihedral_constraint" scorefxn="betaCst" confidence="0" threshold="0" />
+        
+    </FILTERS>
+
+    <MOVERS>
+ 
+
+        <!-- // RELAX MOVERS -->
+        <FastRelax name="repack_and_dock_fit" scorefxn="betaCst" repeats="2"  >
+            <MoveMap name="repack_and_dock_fit_mm">
+              <Chain number="1" chi="1" bb="0"/>
+            </MoveMap>
+        </FastRelax>
+
+
+        <!-- // CONSTRAINTS -->
+        <!-- // LOADING -->
+        <VirtualRoot name="virtual_reroot" removable="false" remove="false" />
+
+        <ConstraintSetMover name="coordinate_and_harmonic_cst" cst_file="DHR10mica18_NCS_MonteCarlo.cst"/>  
+
+        <Idealize name="idealize" />
+
+        <!-- // Non-crystallographic constraints  -->
+        <SetupNCS name="NCS" bb="1" chi="0" wt="1.00" symmetric_sequence="0" >
+        <NCSgroup source="402A-450A" target="2A-50A"/>
+        <NCSgroup source="401A-450A" target="51A-100A"/>
+        <NCSgroup source="401A-450A" target="101A-150A"/>
+        <NCSgroup source="401A-450A" target="151A-200A"/>
+        <NCSgroup source="401A-450A" target="201A-250A"/>
+        <NCSgroup source="401A-450A" target="251A-300A"/>
+        <NCSgroup source="401A-450A" target="301A-350A"/>
+        <NCSgroup source="401A-450A" target="351A-400A"/>
+        <NCSgroup source="401A-450A" target="451A-500A"/>
+        <NCSgroup source="401A-450A" target="501A-550A"/>
+        <NCSgroup source="401A-450A" target="551A-600A"/>
+        <NCSgroup source="401A-450A" target="601A-650A"/>
+        <NCSgroup source="401A-450A" target="651A-700A"/>
+        <NCSgroup source="401A-450A" target="701A-750A"/>
+        <NCSgroup source="401A-450A" target="751A-800A"/>
+        <NCSgroup source="401A-450A" target="801A-850A"/>
+        <NCSgroup source="401A-449A" target="851A-899A"/>
+        </SetupNCS>
+
+        <!-- // BB REPEAT INFORCEMENT FITTING -->
+        <Shear name="shear_middle" residue_selector="middle" scorefxn="betaCst" temperature="1.0" nmoves="1" angle_max="10.0" preserve_detailed_balance="1"/>
+
+        <MinMover name="force_torsion_repeats" scorefxn="Dihedral" chi="0" bb="1" jump="0"  >
+            <MoveMap name="not_middle_repeat_move_map">
+              <Span begin="401" end="450" chi="0" bb="0"/>
+            </MoveMap>
+        </MinMover>
+
+        <MinMover name="minimize_side_chain" scorefxn="betaCst" chi="1" bb="0" jump="1"  />
+
+        <ParsedProtocol name="mc_round" mode="sequence">
+            <Add mover_name="shear_middle" />
+            <Add mover_name="force_torsion_repeats" />  
+            <Add mover_name="minimize_side_chain" />  
+        </ParsedProtocol>
+
+        <GenericSimulatedAnnealer name="monte_carlo_shear" mover_name="mc_round" filter_name="betaCstFilter" trials="500" sample_type="low" temperature="1" drift="1" recover_low="1" preapply="0" saved_accept_file_name="%%checkpoint%%_accepted.pdb" checkpoint_file="%%checkpoint%%" keep_checkpoint_file="1" periodic_mover="repack_and_dock_fit" eval_period="100" />
+
+
+
+    </MOVERS>
+
+
+    <APPLY_TO_POSE>
+    </APPLY_TO_POSE>
+
+   
+   <PROTOCOLS>
+        <Add mover_name="virtual_reroot" />
+
+    <!-- ALIGN TO COORD CST REPACK -->
+        <Add mover_name="coordinate_and_harmonic_cst" />
+        <Add mover_name="repack_and_dock_fit" />
+
+    <!-- FIT WITH MONTECARLO SHEAR MOVES (REPEAT PROPOGATED) -->
+        <Add mover_name="NCS" />
+        <Add mover_name="force_torsion_repeats" />
+        <Add mover_name="monte_carlo_shear" />
+
+    <!-- SCORE TERM FILTERS FOR DEBUGGING/TUNING CONSTRAINTS -->
+        <Add filter_name="atom_pair_filter"/>
+        <Add filter_name="coordinate_filter"/>
+        <Add filter_name="dihedral_filter"/>
+
+    </PROTOCOLS>
+
+    <OUTPUT scorefxn="beta" />
+  
+</ROSETTASCRIPTS>

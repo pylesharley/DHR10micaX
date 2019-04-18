@@ -1,0 +1,95 @@
+<ROSETTASCRIPTS>
+
+    <TASKOPERATIONS>
+    </TASKOPERATIONS>
+
+    <SCOREFXNS>
+        <ScoreFunction name="beta" weights="beta_nov16">
+        </ScoreFunction>
+    </SCOREFXNS>
+
+
+    <FILTERS>
+        <Ddg name="ddg" scorefxn="beta" chain_num="2" repeats="3" repack="true" repack_bound="false" confidence="0"/>
+    </FILTERS>
+
+
+    <MOVERS>
+    <!-- // Fold tree -->
+        <AtomTree name="fold_tree" fold_tree_file="DHR10_on_mica4_surface.ft"/>
+        
+        <MinMover name="min_side_chain" scorefxn="beta" chi="1" bb="0" jump="0" >
+        </MinMover>
+
+        <FastRelax name="repack_sidechains" scorefxn="beta" repeats="3" >
+            <MoveMap jump="0" chi="0" bb="0" >
+                <Chain number="2" bb="0" chi="1" />
+            </MoveMap>
+        </FastRelax>
+
+        <FastRelax name="repack_and_minimize_dock" scorefxn="beta" repeats="5" >
+            <MoveMap jump="0" chi="0" bb="0" >
+                <Chain number="2" bb="0" chi="1" />
+                <Jump number="168" setting="1"/>
+            </MoveMap>
+        </FastRelax>
+        
+        <Translate name="random_translate" chain="B" distribution="uniform" angstroms="5.2" cycles="20" force="true"/>
+
+        <MutateResidue name="mutate_residue_39" target="39B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_46" target="46B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_50" target="50B" new_res="THR" />
+        <MutateResidue name="mutate_residue_81" target="81B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_88" target="88B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_89" target="89B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_96" target="96B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_131" target="131B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_138" target="138B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_139" target="139B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_146" target="146B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_150" target="150B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_181" target="181B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_188" target="188B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_196" target="196B" new_res="ALA" />
+
+
+    </MOVERS>
+
+
+    <APPLY_TO_POSE>
+    </APPLY_TO_POSE>
+
+   
+    <PROTOCOLS>
+        <Add mover_name="fold_tree" />
+
+        <Add mover_name="mutate_residue_39" />
+        <Add mover_name="mutate_residue_46" />
+        <Add mover_name="mutate_residue_50" />
+        <Add mover_name="mutate_residue_81" />
+        <Add mover_name="mutate_residue_88" />
+        <Add mover_name="mutate_residue_89" />
+        <Add mover_name="mutate_residue_96" />
+        <Add mover_name="mutate_residue_131" />
+        <Add mover_name="mutate_residue_138" />
+        <Add mover_name="mutate_residue_139" />
+        <Add mover_name="mutate_residue_146" />
+        <Add mover_name="mutate_residue_150" />
+        <Add mover_name="mutate_residue_181" />
+        <Add mover_name="mutate_residue_188" />
+        <Add mover_name="mutate_residue_196" />
+
+        <Add mover_name="random_translate" />
+        <Add mover_name="repack_sidechains" />
+        <Add mover_name="repack_and_minimize_dock" />
+
+        <Add filter_name="ddg" />
+        
+      </PROTOCOLS>
+
+
+    <OUTPUT scorefxn="beta" />
+
+
+ 
+</ROSETTASCRIPTS>

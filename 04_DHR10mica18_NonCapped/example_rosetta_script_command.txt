@@ -1,0 +1,1 @@
+/PATH/rosetta_scripts.static.linuxgccrelease -database /PATH/database @rosetta_scripts.flag -s DHR10mica18.pdb -scorefile score.sc -suffix _NonCapped_on_mica_0A -parser:protocol DHR10mica18_NonCapped_on_mica.xml

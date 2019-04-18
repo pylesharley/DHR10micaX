@@ -1,0 +1,1 @@
+/PATH/rosetta_scripts.static.linuxgccrelease -database /PATH/database/ @rosetta_scripts.flag -s DHR10mica18_on_Ksublayer.pdb -scorefile score.sc -suffix _Dock_11A -parser:protocol DHR10mica18_on_Ksublayer_hexagon.xml

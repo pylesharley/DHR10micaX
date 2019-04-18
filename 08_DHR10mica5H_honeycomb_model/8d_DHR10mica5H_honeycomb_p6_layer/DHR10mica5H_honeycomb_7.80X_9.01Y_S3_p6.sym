@@ -1,0 +1,28 @@
+symmetry_name DHR10mica5H_honeycomb_7.80X_9.01Y_S3_p6_monomer_P_6
+E = 2*VRT_0_0_0_0_base + 1*(VRT_0_0_0_0_base:VRT_3_0_1_0_base) + 2*(VRT_0_0_0_0_base:VRT_2_0_1_0_base)
+anchor_residue 1
+virtual_coordinates_start
+xyz VRT_0_0_0_0 1.000000,0.000000,0.000000 0.000000,1.000000,0.000000 -76.468494,77.865532,12.396810
+xyz VRT_0_0_0_0_base 1.000000,0.000000,0.000000 0.000000,1.000000,0.000000 -77.468494,76.865532,11.396810
+xyz VRT_3_0_1_0 -1.000000,0.000000,0.000000 0.000000,-1.000000,0.000000 -27.238506,101.760261,12.396810
+xyz VRT_3_0_1_0_base -1.000000,0.000000,0.000000 0.000000,-1.000000,0.000000 -26.238506,102.760261,11.396810
+xyz VRT_2_0_1_0 -0.500000,0.866025,0.000000 -0.866025,-0.500000,0.000000 -132.906282,74.469369,12.396810
+xyz VRT_2_0_1_0_base -0.500000,0.866025,0.000000 -0.866025,-0.500000,0.000000 -131.540256,74.103344,11.396810
+xyz VRT_4_n1_0_0 -0.500000,-0.866025,0.000000 0.866025,-0.500000,0.000000 -101.746225,27.290892,12.396810
+xyz VRT_4_n1_0_0_base -0.500000,-0.866025,0.000000 0.866025,-0.500000,0.000000 -102.112250,28.656918,11.396810
+virtual_coordinates_stop
+connect_virtual JUMP_0_0_0_0_to_subunit VRT_0_0_0_0_base SUBUNIT
+connect_virtual JUMP_3_0_1_0_to_subunit VRT_3_0_1_0_base SUBUNIT
+connect_virtual JUMP_2_0_1_0_to_subunit VRT_2_0_1_0_base SUBUNIT
+connect_virtual JUMP_4_n1_0_0_to_subunit VRT_4_n1_0_0_base SUBUNIT
+connect_virtual JUMP_0_0_0_0_to_com VRT_0_0_0_0 VRT_0_0_0_0_base
+connect_virtual JUMP_3_0_1_0_to_com VRT_3_0_1_0 VRT_3_0_1_0_base
+connect_virtual JUMP_2_0_1_0_to_com VRT_2_0_1_0 VRT_2_0_1_0_base
+connect_virtual JUMP_4_n1_0_0_to_com VRT_4_n1_0_0 VRT_4_n1_0_0_base
+connect_virtual JUMP_3_0_1_0 VRT_0_0_0_0 VRT_3_0_1_0
+connect_virtual JUMP_2_0_1_0 VRT_0_0_0_0 VRT_2_0_1_0
+connect_virtual JUMP_4_n1_0_0 VRT_0_0_0_0 VRT_4_n1_0_0
+set_dof JUMP_0_0_0_0_to_com x y
+set_dof JUMP_0_0_0_0_to_subunit angle_x angle_y angle_z
+set_jump_group JUMPGROUP1  JUMP_0_0_0_0_to_subunit JUMP_3_0_1_0_to_subunit JUMP_2_0_1_0_to_subunit JUMP_4_n1_0_0_to_subunit
+set_jump_group JUMPGROUP2  JUMP_0_0_0_0_to_com JUMP_3_0_1_0_to_com JUMP_2_0_1_0_to_com JUMP_4_n1_0_0_to_com

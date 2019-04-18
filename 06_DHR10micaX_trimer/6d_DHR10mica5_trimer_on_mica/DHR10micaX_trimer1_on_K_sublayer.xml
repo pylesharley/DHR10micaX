@@ -1,0 +1,84 @@
+<ROSETTASCRIPTS>
+
+    <TASKOPERATIONS>
+        <IncludeCurrent name="IC"/>
+        <LimitAromaChi2 name="aroChi"/>
+    </TASKOPERATIONS>
+
+    <SCOREFXNS>
+        <ScoreFunction name="Beta" weights="beta_nov16">
+        </ScoreFunction>
+    </SCOREFXNS>
+
+
+    <FILTERS>
+        <Ddg name="ddg" scorefxn="Beta" chain_num="2" repeats="1" repack="false" repack_bound="false" confidence="0"/>
+    </FILTERS>
+
+
+    <MOVERS>
+    <!-- // Fold tree -->
+        <AtomTree name="fold_tree" fold_tree_file="DHR10mica5_trimer_on_mica.ft"/>
+        
+        <MinMover name="min_side_chain" scorefxn="Beta" chi="1" bb="0" jump="0">
+            <MoveMap jump="0" chi="1" bb="0" >
+                <Jump number="2269" setting="1"/>
+                <Jump number="2270" setting="1"/>
+                <Jump number="2271" setting="1"/>
+            </MoveMap>
+        </MinMover>
+
+        <FastRelax name="repack_and_dock" scorefxn="Beta" repeats="2" task_operations="aroChi,IC" >
+            <MoveMap jump="0" chi="0" bb="0" >
+                <!-- Residues near interface allowed to repack rotamers (except for lattice-matched glutamates) -->
+                <!-- Shifted by chain A (+2269) -->
+                <Span begin="2270" end="2294" chi="1" bb="0" />
+                <Span begin="2296" end="2301" chi="1" bb="0" />
+                <Span begin="2303" end="2308" chi="1" bb="0" />
+                <Span begin="2310" end="2329" chi="1" bb="0" />
+                <!-- Shifted by chains A and B (+2517) -->
+                <Span begin="2518" end="2542" chi="1" bb="0" />
+                <Span begin="2544" end="2549" chi="1" bb="0" />
+                <Span begin="2551" end="2556" chi="1" bb="0" />
+                <Span begin="2558" end="2577" chi="1" bb="0" />
+                <!-- Shifted by chains A, B, and C (+2165) -->
+                <Span begin="2766" end="2790" chi="1" bb="0" />
+                <Span begin="2792" end="2797" chi="1" bb="0" />
+                <Span begin="2799" end="2804" chi="1" bb="0" />
+                <Span begin="2806" end="2825" chi="1" bb="0" />
+                <!-- Unshifted residues ranges for reference -->
+                <!-- <Span begin="01" end="25" chi="1" bb="0"/> 
+                <Span begin="27" end="32" chi="1" bb="0"/> 
+                <Span begin="34" end="39" chi="1" bb="0"/> 
+                <Span begin="41" end="60" chi="1" bb="0"/>  -->
+                <Jump number="2269" setting="1"/>
+                <Jump number="2270" setting="1"/>
+                <Jump number="2271" setting="1"/>
+            </MoveMap>
+
+        </FastRelax>
+
+    
+    </MOVERS>
+
+
+    <APPLY_TO_POSE>
+    </APPLY_TO_POSE>
+
+   
+    <PROTOCOLS>
+        <Add mover_name="fold_tree" />
+
+        <Add mover_name="repack_and_dock" />
+        <Add mover_name="min_side_chain" />
+
+        <Add filter_name="ddg" />
+        
+      </PROTOCOLS>
+
+
+    <OUTPUT scorefxn="Beta" />
+
+
+ 
+</ROSETTASCRIPTS>

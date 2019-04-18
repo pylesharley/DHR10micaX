@@ -1,0 +1,133 @@
+<ROSETTASCRIPTS>
+
+    <TASKOPERATIONS>
+        <LimitAromaChi2 name="aroChi"/>
+    </TASKOPERATIONS>
+
+    <SCOREFXNS>
+        <ScoreFunction name="beta" weights="beta_nov16">
+        </ScoreFunction>
+    </SCOREFXNS>
+
+
+    <FILTERS>
+        <Ddg name="ddg" scorefxn="beta" jump="2269" repeats="3" repack="true" repack_bound="false" confidence="0"/>
+    </FILTERS>
+
+
+    <MOVERS>
+    <!-- // Fold tree -->
+        <AtomTree name="fold_tree" fold_tree_file="DHR10mica18_on_Ksublayer_hexagon.ft"/>
+        
+        <MinMover name="min_side_chain" scorefxn="beta" chi="1" bb="0" jump="0" >
+        </MinMover>
+
+        <FastRelax name="repack" scorefxn="beta" repeats="2" >
+            <MoveMap jump="0" chi="0" bb="0" >
+                <Chain number="2" bb="0" chi="1" />
+            </MoveMap>
+        </FastRelax>
+
+        <FastRelax name="repack_and_minimize_dock" scorefxn="beta" repeats="2" task_operations="aroChi">
+            <MoveMap jump="0" chi="0" bb="0" >
+                <Chain number="2" bb="0" chi="1" />
+                <Jump number="2269" setting="1"/>
+            </MoveMap>
+        </FastRelax>
+        
+        <!-- Substitutions alter DHR10-mica18 into DHR10-mica18NC by making the N and C-terminal repeat sequences indentical to internal repeats -->
+        <MutateResidue name="mutate_residue_4" target="4B" new_res="VAL" />
+        <MutateResidue name="mutate_residue_5" target="5B" new_res="LEU" />
+        <MutateResidue name="mutate_residue_8" target="8B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_9" target="9B" new_res="ILE" />
+        <MutateResidue name="mutate_residue_12" target="12B" new_res="ILE" />
+        <MutateResidue name="mutate_residue_14" target="14B" new_res="GLU" />
+        <MutateResidue name="mutate_residue_20" target="20B" new_res="GLN" />
+        <MutateResidue name="mutate_residue_22" target="22B" new_res="GLU" />
+        <MutateResidue name="mutate_residue_24" target="24B" new_res="TYR" />
+        <MutateResidue name="mutate_residue_26" target="26B" new_res="ILE" />
+        <MutateResidue name="mutate_residue_27" target="27B" new_res="SER" />
+        <MutateResidue name="mutate_residue_30" target="30B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_31" target="31B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_34" target="34B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_38" target="38B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_41" target="41B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_45" target="45B" new_res="LYS" />
+        <MutateResidue name="mutate_residue_854" target="854B" new_res="VAL" />
+        <MutateResidue name="mutate_residue_856" target="856B" new_res="GLU" />
+        <MutateResidue name="mutate_residue_857" target="857B" new_res="LEU" />
+        <MutateResidue name="mutate_residue_860" target="860B" new_res="ARG" />
+        <MutateResidue name="mutate_residue_861" target="861B" new_res="LEU" />
+        <MutateResidue name="mutate_residue_863" target="863B" new_res="LYS" />
+        <MutateResidue name="mutate_residue_864" target="864B" new_res="GLU" />
+        <MutateResidue name="mutate_residue_865" target="865B" new_res="VAL" />
+        <MutateResidue name="mutate_residue_868" target="868B" new_res="ASN" />
+        <MutateResidue name="mutate_residue_874" target="874B" new_res="TYR" />
+        <MutateResidue name="mutate_residue_882" target="882B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_886" target="886B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_889" target="889B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_890" target="890B" new_res="VAL" />
+        <MutateResidue name="mutate_residue_893" target="893B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_894" target="894B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_897" target="897B" new_res="ALA" />
+        <MutateResidue name="mutate_residue_899" target="899B" new_res="ILE" />
+
+    </MOVERS>
+
+
+    <APPLY_TO_POSE>
+    </APPLY_TO_POSE>
+
+   
+    <PROTOCOLS>
+        <Add mover_name="fold_tree" />
+        <!-- Substitutions alter DHR10-mica18 into DHR10-mica18NC by making the N and C-terminal repeat sequences indentical to internal repeats -->
+        <Add mover_name="mutate_residue_4" />
+        <Add mover_name="mutate_residue_5" />
+        <Add mover_name="mutate_residue_8" />
+        <Add mover_name="mutate_residue_9" />
+        <Add mover_name="mutate_residue_12" />
+        <Add mover_name="mutate_residue_14" />
+        <Add mover_name="mutate_residue_20" />
+        <Add mover_name="mutate_residue_22" />
+        <Add mover_name="mutate_residue_24" />
+        <Add mover_name="mutate_residue_26" />
+        <Add mover_name="mutate_residue_27" />
+        <Add mover_name="mutate_residue_30" />
+        <Add mover_name="mutate_residue_31" />
+        <Add mover_name="mutate_residue_34" />
+        <Add mover_name="mutate_residue_38" />
+        <Add mover_name="mutate_residue_41" />
+        <Add mover_name="mutate_residue_45" />
+        <Add mover_name="mutate_residue_854" />
+        <Add mover_name="mutate_residue_856" />
+        <Add mover_name="mutate_residue_857" />
+        <Add mover_name="mutate_residue_860" />
+        <Add mover_name="mutate_residue_861" />
+        <Add mover_name="mutate_residue_863" />
+        <Add mover_name="mutate_residue_864" />
+        <Add mover_name="mutate_residue_865" />
+        <Add mover_name="mutate_residue_868" />
+        <Add mover_name="mutate_residue_874" />
+        <Add mover_name="mutate_residue_882" />
+        <Add mover_name="mutate_residue_886" />
+        <Add mover_name="mutate_residue_889" />
+        <Add mover_name="mutate_residue_890" />
+        <Add mover_name="mutate_residue_893" />
+        <Add mover_name="mutate_residue_894" />
+        <Add mover_name="mutate_residue_897" />
+        <Add mover_name="mutate_residue_899" />
+
+        <Add mover_name="repack" />
+        <Add mover_name="repack_and_minimize_dock" />
+
+        <Add filter_name="ddg" />
+        
+      </PROTOCOLS>
+
+
+    <OUTPUT scorefxn="beta" />
+
+
+ 
+</ROSETTASCRIPTS>

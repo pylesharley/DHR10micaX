@@ -1,0 +1,46 @@
+<ROSETTASCRIPTS>
+
+    <TASKOPERATIONS>
+        <InitializeFromCommandline name="IFC"/>
+        <IncludeCurrent name="IC"/>
+        <LimitAromaChi2 name="aroChi"/>
+
+        <RestrictToRepacking name="repack_only" />
+    </TASKOPERATIONS>
+
+    <SCOREFXNS>
+        <ScoreFunction name="Beta" weights="beta_nov16" symmetric="0">
+        </ScoreFunction>
+    </SCOREFXNS>
+
+
+    <FILTERS>
+        <ShapeComplementarity name="sc" jump="1" verbose="1" min_sc="0.5" write_int_area="1" confidence="0" /> 
+    </FILTERS>
+
+
+    <MOVERS>
+        <AtomTree name="K_sublattice_fold_tree" fold_tree_file="K_sublattice.ft"/>
+
+        <RigidBodyTransMover name="set_symmetry_axis" jump="1" distance="%%distance%%" x="%%axis_X%%" y="%%axis_Y%%" z="0" />
+        
+    </MOVERS>
+
+
+    <APPLY_TO_POSE>
+    </APPLY_TO_POSE>
+
+   
+    <PROTOCOLS>
+        <Add mover_name="K_sublattice_fold_tree" />
+
+        <Add mover_name="set_symmetry_axis" />
+
+      </PROTOCOLS>
+
+
+    <OUTPUT scorefxn="Beta" />
+
+
+ 
+</ROSETTASCRIPTS>

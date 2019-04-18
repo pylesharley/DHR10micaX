@@ -1,0 +1,11 @@
+-mute all
+
+-remodel:blueprint DHR10mica5_LoopReplacement.bp
+
+-num_trajectory 100
+-save_top 5
+-overwrite
+
+-chain A
+-no_optH false
+

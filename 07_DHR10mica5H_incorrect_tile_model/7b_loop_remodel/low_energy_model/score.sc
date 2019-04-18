@@ -1,0 +1,3 @@
+SEQUENCE: 
+SCORE: total_score dslf_fa13    fa_atr    fa_dun   fa_elec fa_intra_rep       fa_rep       fa_sol hbond_bb_sc hbond_lr_bb    hbond_sc hbond_sr_bb       omega     p_aa_pp pro_close      rama       ref yhh_planarity description 
+SCORE:    -448.443     0.000 -1103.724   258.372   -99.315        2.051      120.265      576.292      -9.624      -5.510     -14.347    -145.935      14.879     -36.056     0.149   -21.709    15.768         0.000 DHR10mica5_monomer_Ctrim_38E_0001

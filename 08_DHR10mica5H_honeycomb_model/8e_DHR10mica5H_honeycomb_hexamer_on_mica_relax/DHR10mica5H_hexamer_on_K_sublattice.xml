@@ -1,0 +1,73 @@
+<ROSETTASCRIPTS>
+
+    <TASKOPERATIONS>
+        <LimitAromaChi2 name="aroChi"/>
+    </TASKOPERATIONS>
+
+    <SCOREFXNS>
+        <ScoreFunction name="Beta" weights="beta_nov16">
+        </ScoreFunction>
+    </SCOREFXNS>
+
+
+    <FILTERS>
+        <ShapeComplementarity name="sc" jump="2269" verbose="1" min_sc="0.5" write_int_area="1" confidence="0" /> 
+        <Ddg name="ddg" scorefxn="Beta" jump="2269" repeats="1" repack="true" repack_bound="false" confidence="0"/>
+    </FILTERS>
+
+
+    <MOVERS>
+    <!-- // Fold tree -->
+        <AtomTree name="fold_tree" fold_tree_file="DHR10mica5H_hexamer_on_K_sublattice.ft"/>
+
+        <FastRelax name="repack" scorefxn="Beta" repeats="1" task_operations="aroChi" >
+            <MoveMap jump="0" chi="1" bb="0" >
+            </MoveMap>
+        </FastRelax>
+
+        <FastRelax name="repack_and_minimize_docks" scorefxn="Beta" repeats="1" task_operations="aroChi" >
+            <MoveMap jump="0" chi="1" bb="0" >
+                <Jump number="2269" setting="1"/>
+                <Jump number="2270" setting="1"/>
+                <Jump number="2271" setting="1"/>
+                <Jump number="2272" setting="1"/>
+                <Jump number="2273" setting="1"/>
+                <Jump number="2274" setting="1"/>
+            </MoveMap>
+        </FastRelax>
+
+        <!-- <FastRelax name="relax" scorefxn="Beta" repeats="1" task_operations="aroChi" >
+            <MoveMap jump="0" chi="1" bb="1" >
+                <Jump number="2269" setting="1"/>
+                <Jump number="2270" setting="1"/>
+                <Jump number="2271" setting="1"/>
+                <Jump number="2272" setting="1"/>
+                <Jump number="2273" setting="1"/>
+                <Jump number="2274" setting="1"/>
+            </MoveMap>
+        </FastRelax> -->
+
+    </MOVERS>
+
+
+    <APPLY_TO_POSE>
+    </APPLY_TO_POSE>
+
+   
+    <PROTOCOLS>
+        <Add mover_name="fold_tree" />
+
+        <Add mover_name="repack" />
+        <Add mover_name="repack_and_minimize_docks" />
+        <!-- <Add mover_name="relax" /> -->
+
+        <Add filter_name="ddg" />
+        <Add filter_name="sc" />
+    </PROTOCOLS>
+
+
+    <OUTPUT scorefxn="Beta" />
+
+
+ 
+</ROSETTASCRIPTS>

@@ -1,0 +1,4 @@
+SEQUENCE: 
+SCORE: total_score         ddg dslf_fa13    fa_atr fa_dun_dev fa_dun_rot fa_dun_semi     fa_elec fa_intra_atr_xover4 fa_intra_elec fa_intra_rep_xover4 fa_intra_sol_xover4              fa_rep              fa_sol hbond_bb_sc hbond_lr_bb    hbond_sc hbond_sr_bb    hxl_tors     lk_ball lk_ball_bridge lk_ball_bridge_uncpl lk_ball_iso       omega     p_aa_pp pro_close rama_prepro         ref description 
+SCORE:   -1115.862    -278.446     0.000 -4217.735     46.621    278.411     578.059   -1231.141            -211.619      -204.971             129.322             162.002             548.675            3676.659     -42.617     -28.404     -90.949    -644.201      47.868    1961.465         -2.298              -19.023   -1907.757      87.000    -110.158     0.000      -9.034      87.964 DHR10mica14_checker_on_Ksublayer_Dock_11D_0037
+

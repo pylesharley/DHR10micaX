@@ -1,0 +1,72 @@
+<ROSETTASCRIPTS>
+    <TASKOPERATIONS>
+        <InitializeFromCommandline name="IFC"/>
+        <IncludeCurrent name="IC"/>
+        <LimitAromaChi2 name="aroChi"/>
+
+        <RestrictToRepacking name="repack_only" />
+    </TASKOPERATIONS>
+
+    <RESIDUE_SELECTORS>
+       <Index name="middle" resnums="401A-450A" />
+       <Not name="not_middle" selector="middle" />
+    </RESIDUE_SELECTORS>
+
+    <SCOREFXNS>
+        <ScoreFunction name="Beta" weights="beta_nov16">
+        </ScoreFunction>
+
+
+
+        <ScoreFunction name="BetaCst" weights="beta_nov16">
+            <Reweight scoretype="atom_pair_constraint" weight="1.0"/>
+            <Reweight scoretype="dihedral_constraint" weight="1.0"/>                
+            <Reweight scoretype="coordinate_constraint" weight="0.1"/>
+        </ScoreFunction>
+
+        <ScoreFunction name="BetaDist" weights="beta_nov16">              
+            <Reweight scoretype="atom_pair_constraint" weight="1.0"/>
+        </ScoreFunction>
+
+    </SCOREFXNS>
+
+    <FILTERS>
+        <ScoreType name="dist_cst" score_type="atom_pair_constraint" scorefxn="BetaCst" confidence="0" threshold="0" />
+        <ScoreType name="coord_cst" score_type="coordinate_constraint" scorefxn="BetaCst" confidence="0" threshold="0" />
+    </FILTERS>
+
+    <MOVERS>
+        <!-- // RELAX MOVERS -->
+        <FastRelax name="relax_loop_with_hydrogen_bond_and_CA_coord_cst" scorefxn="BetaCst" repeats="3"  >
+            <MoveMap jump="0" chi="0" bb="0" >
+                <Span begin="162" end="171" chi="1" bb="0" />
+                <Span begin="205" end="237" chi="1" bb="1" />
+            </MoveMap>
+        </FastRelax>
+
+        <ConstraintSetMover name="distance_cst" cst_file="DHR10mica5_LoopReplacement.cst"/>  
+        <ConstraintSetMover name="remove_cst" cst_file="none"/>  
+
+    </MOVERS>
+
+
+    <APPLY_TO_POSE>
+    </APPLY_TO_POSE>
+
+   
+   <PROTOCOLS>
+        <!-- Load constraints -->
+        <Add mover_name="distance_cst" />
+        
+        <!-- Relax replaced loop-->
+        <Add mover_name="relax_loop_with_hydrogen_bond_and_CA_coord_cst" />
+
+        <!-- Score term filters for tunning constraint strength -->
+        <Add filter_name="dist_cst"/>
+        <Add filter_name="coord_cst"/>
+
+    </PROTOCOLS>
+
+    <OUTPUT scorefxn="Beta" />
+  
+</ROSETTASCRIPTS>
