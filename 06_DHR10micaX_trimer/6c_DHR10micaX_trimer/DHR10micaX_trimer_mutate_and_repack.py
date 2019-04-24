@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 
-sample_c3 = '''/home/pylesh/rosetta_builds/main/source/bin/rosetta_scripts.static.linuxgccrelease -database /home/pylesh/rosetta_builds/main/database @rosetta_scripts.flag -s {0} -scorefile score.sc  -parser:script_vars translate_X={1} translate_Y={2} distance={3} -suffix {4} -parser:protocol DHR10micaX_trimer_mutate_and_repack.xml'''
+sample_c3 = '''/EXECUTABLE_PATH/rosetta_scripts.static.linuxgccrelease -database /DATABASE_PATH/database @rosetta_scripts.flag -s {0} -scorefile score.sc  -parser:script_vars translate_X={1} translate_Y={2} distance={3} -suffix {4} -parser:protocol DHR10micaX_trimer_mutate_and_repack.xml'''
 
 
 import numpy

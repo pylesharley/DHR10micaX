@@ -1,9 +1,9 @@
 #! /usr/bin/env python
 
 
-sample_c3 = '''/home/pylesh/rosetta_builds/main/source/bin/rosetta_scripts.static.linuxgccrelease -database /home/pylesh/rosetta_builds/main/database  @rosetta_scripts.flag -s {0} -scorefile score.sc  -parser:script_vars translate_X={1} translate_Y={2} distance={3} -suffix {4} -parser:protocol DHR10micaX_c3_scan.xml'''
+sample_c3 = '''/EXECUTABLE_PATH/rosetta_scripts.static.linuxgccrelease -database /DATABASE_PATH/database  @rosetta_scripts.flag -s {0} -scorefile score.sc  -parser:script_vars translate_X={1} translate_Y={2} distance={3} -suffix {4} -parser:protocol DHR10micaX_c3_scan.xml'''
 
-translate_surface = '''/home/pylesh/rosetta_builds/main/source/bin/rosetta_scripts.static.linuxgccrelease -database /home/pylesh/rosetta_builds/main/database  -s {0} -scorefile surface.sc -parser:script_vars axis_X={1} axis_Y={2} distance={3} -suffix _{4} -parser:protocol translate_surface.xml -nstruct 1 -beta -mute all'''
+translate_surface = '''/EXECUTABLE_PATH/rosetta_scripts.static.linuxgccrelease -database /DATABASE_PATH/database  -s {0} -scorefile surface.sc -parser:script_vars axis_X={1} axis_Y={2} distance={3} -suffix _{4} -parser:protocol translate_surface.xml -nstruct 1 -beta -mute all'''
 
 import numpy
 import sys

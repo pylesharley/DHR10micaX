@@ -1,0 +1,1 @@
+Protein chains in DHR10mica5_trimer_on_mica.pdb are from output of protocol 6c (example: 06_DHR10micaX_trimer/6c_DHR10micaX_trimer/low_energy_model/DHR10mica5_nterminus_trim2_-2.60X_1.50Y_SymAxis2_TrimerInterface_W1_0014.pdb)

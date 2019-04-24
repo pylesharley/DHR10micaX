@@ -1,8 +1,7 @@
 #! /usr/bin/env python
 
 
-full_atom_c2 = '''/EXECUTABLE_PATH/rosetta_scripts.static.linuxgccrelease -database /DATABASE_PATH/database @rosetta_scripts.flag -s {0} -scorefile score.sc  -parser:script_vars translate_X={1} translate_Y={2} distance={3} -suffix {4} -parser:protocol DHR10mica5H_monomer_honeycomb_C2_scan.xml'''
-poly_ala_c2 = '''/EXECUTABLE_PATH/rosetta_scripts.static.linuxgccrelease -database /DATABASE_PATH/database @rosetta_scripts.flag -s {0} -scorefile score.sc  -parser:script_vars translate_X={1} translate_Y={2} distance={3} -suffix _POLYALA_{4} -parser:protocol DHR10mica5H_monomer_honeycomb_C2_scan_POLYALA.xml'''
+sample_c2 = '''/EXECUTABLE_PATH/rosetta_scripts.static.linuxgccrelease -database /DATABASE_PATH/database @rosetta_scripts.flag -s {0} -scorefile score.sc  -parser:script_vars translate_X={1} translate_Y={2} distance={3} -suffix {4} -parser:protocol DHR10mica5_tile_p6_scan.xml'''
 
 translate_surface = '''/EXECUTABLE_PATH/rosetta_scripts.static.linuxgccrelease -database /DATABASE_PATH/database -s {0} -scorefile score.sc -parser:script_vars axis_X={1} axis_Y={2} distance={3} -suffix _{4} -parser:protocol translate_surface.xml -nstruct 1 -beta -mute all '''
 
@@ -43,7 +42,5 @@ for i, C2_axis in enumerate(sublayer_C2_axes):
 			combined_Y = axis_Y + lattice_Y
 			combined_distance = ((combined_X**2)+(combined_Y**2))**0.5
 
-			print poly_ala_c2.format(protein_pdb, combined_X, combined_Y, combined_distance, format_coordinate_string(combined_X, combined_Y, sym_axis_number) )
-			print full_atom_c2.format(protein_pdb, combined_X, combined_Y, combined_distance, format_coordinate_string(combined_X, combined_Y, sym_axis_number) )
-
+			print sample_c2.format(protein_pdb, combined_X, combined_Y, combined_distance, format_coordinate_string(combined_X, combined_Y, sym_axis_number) )
 

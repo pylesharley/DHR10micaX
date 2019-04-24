@@ -1,5 +1,5 @@
 
-Uses DHR10_on_mica4_surface_thread_2V_0001.pdb output from 01_DHR10mica4
+Uses output from 01_DHR10mica4. The example DHR10_on_mica4_surface_thread_2V_0001.pdb is from 01_DHR10mica4/low_energy_model/
 
 
 python2.7 ./pdb_sequence.py DHR10_on_mica4_surface_thread_2V_0001.pdb > DHR10_mica4.fas

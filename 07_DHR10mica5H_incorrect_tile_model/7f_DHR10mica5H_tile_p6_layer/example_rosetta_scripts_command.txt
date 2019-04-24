@@ -1,1 +1,1 @@
-/home/pylesh/rosetta_builds/main/source/bin/rosetta_scripts.static.linuxgccrelease -database /home/pylesh/rosetta_builds/main/database @rosetta_scripts.flag -parser:protocol DHR10mica5H_p6_layer.xml -scorefile score.sc -s DHR10mica5H_tile_p6.pdb -parser:script_vars sym=DHR10mica5_p6_tiling.sym -suffix _1A
+/EXECUTABLE_PATH/rosetta_scripts.static.linuxgccrelease -database /DATABASE_PATH/database @rosetta_scripts.flag -parser:protocol DHR10mica5H_p6_layer.xml -scorefile score.sc -s DHR10mica5H_tile_p6.pdb -parser:script_vars sym=DHR10mica5_p6_tiling.sym -suffix _1A

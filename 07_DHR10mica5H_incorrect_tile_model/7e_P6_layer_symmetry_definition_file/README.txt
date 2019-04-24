@@ -9,7 +9,7 @@ select chains in second trimer and copy to new object ('obj02')
 
 At the pymol command prompt run the unit_cell.py script by typing:
 run /PATH/unit_cell.py
-where 'PATH' is the location of this directory on your computer 
+where 'PATH' is the location of unit_cell.py on your computer 
 
 At the pymol command prompt type: 
 p6('obj01', 'obj02')

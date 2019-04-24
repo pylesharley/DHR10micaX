@@ -1,1 +1,1 @@
-/PATH/rosetta_scripts.static.linuxgccrelease -database /PATH/database @rosetta_scripts.flag -s DHR10mica5_trimer_on_mica.pdb -scorefile score.sc -suffix _1A -parser:protocol DHR10micaX_trimer1_on_K_sublayer.xml
+/EXECUTABLE_PATH/rosetta_scripts.static.linuxgccrelease -database /DATABASE_PATH/database @rosetta_scripts.flag -s DHR10mica5_trimer_on_mica.pdb -scorefile score.sc -suffix _1A -parser:protocol DHR10micaX_trimer1_on_K_sublayer.xml

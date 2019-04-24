@@ -1,0 +1,1 @@
+DHR10mica5_monomer_Ctrim_38E_0001.pdb is low energy model from protocol 7b (07_DHR10mica5H_incorrect_tile_model/7b_loop_remodel/low_energy_model/DHR10mica5_monomer_Ctrim_38E_0001.pdb)
