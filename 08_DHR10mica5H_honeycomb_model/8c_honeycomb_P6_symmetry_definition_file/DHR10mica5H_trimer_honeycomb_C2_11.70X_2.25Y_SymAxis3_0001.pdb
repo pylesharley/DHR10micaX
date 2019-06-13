@@ -1,5 +1,3 @@
-HETNAM       K A1080  K                                                         
-HETNAM       K E1080  K                                                         
 HETATM    1  K     K A1080      -5.200   0.000   0.000  1.00  0.00           K  
 TER                                                                             
 ATOM      3  N   SER B   1     -49.275 -13.457  20.529  1.00  0.00           N  
